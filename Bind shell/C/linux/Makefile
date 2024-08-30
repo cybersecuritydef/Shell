@@ -1,5 +1,5 @@
 TARGET = bindShell
-PREFIX = /sbin
+PREFIX = /bin
 CFLAGS = -Wall -Wextra
 CC = gcc
 OBJECTS = bindShell.o execShell.o server.o 
