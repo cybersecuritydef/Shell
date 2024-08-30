@@ -1,5 +1,5 @@
 TARGET = reverseShell
-PREFIX = /sbin
+PREFIX = /bin
 CFLAGS = -Wall -Wextra
 CC = gcc
 OBJECTS = reverseShell.o execShell.o connect.o 
