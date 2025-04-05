@@ -18,11 +18,11 @@ SOCKET connect_to_server(const char *ipaddr, uint16_t port){
     SOCKET s;
     struct sockaddr_in sin;
     memset(&sin, '\0', sizeof(sin));
-    if((s = WSASocket(AF_INET, SOCK_STREAM, IPPROTO_TCP, NULL, 0, 0)) != SOCKET_ERROR){
+    if((s = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) != SOCKET_ERROR){
         sin.sin_addr.S_un.S_addr = inet_addr(get_addr_by_name(ipaddr));
         sin.sin_family = AF_INET;
         sin.sin_port = htons(port);
-        if(WSAConnect(s, (const struct sockaddr*)&sin, sizeof(sin), NULL, NULL, NULL, NULL) != SOCKET_ERROR)
+        if(connect(s, (const struct sockaddr*)&sin, sizeof(sin)) != SOCKET_ERROR)
             return s;
     }
     return SOCKET_ERROR;
