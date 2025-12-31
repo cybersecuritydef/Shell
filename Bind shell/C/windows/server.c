@@ -1,6 +1,6 @@
 #include "server.h"
 
-static char *get_addr_by_name(const char *name){
+static char *host_to_address(const char *name){
     struct hostent *hst = NULL;
     if((hst = gethostbyname(name)) != NULL)
         return inet_ntoa(*((struct in_addr*)hst->h_addr_list[0]));
