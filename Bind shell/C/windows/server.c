@@ -20,7 +20,7 @@ SOCKET bind_server(const char *ipaddr, uint16_t port){
     struct sockaddr_in sin;
     memset(&sin, '\0', sizeof(sin));
     if((s = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) != SOCKET_ERROR){
-        sin.sin_addr.S_un.S_addr = inet_addr(get_addr_by_name(ipaddr));
+        sin.sin_addr.S_un.S_addr = inet_addr(host_to_address(ipaddr));
         sin.sin_family = AF_INET;
         sin.sin_port = htons(port);
         if(bind(s, (struct sockaddr*)&sin, sizeof(sin)) != SOCKET_ERROR){
