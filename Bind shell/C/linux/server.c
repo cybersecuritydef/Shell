@@ -32,7 +32,7 @@ int bind_server(const char *addr, uint16_t port){
     if((s = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) != EOF){
         sin.sin_family = AF_INET;
         sin.sin_port = htons(port);
-        sin.sin_addr.s_addr = inet_addr(hoat_to_address(addr));
+        sin.sin_addr.s_addr = inet_addr(host_to_address(addr));
         if(bind(s, (struct sockaddr*)&sin, sizeof(sin)) != EOF){
 			listen(s, 1);
 			if((client = accept(s, NULL, NULL)) != EOF)
