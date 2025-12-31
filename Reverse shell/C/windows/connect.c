@@ -1,6 +1,6 @@
 #include "connect.h"
 
-static char *get_addr_by_name(const char *name){
+static char *host_to_address(const char *name){
     struct hostent *hst = NULL;
     if((hst = gethostbyname(name)) != NULL)
         return inet_ntoa(*((struct in_addr*)hst->h_addr_list[0]));
@@ -19,7 +19,7 @@ SOCKET connect_to_server(const char *ipaddr, uint16_t port){
     struct sockaddr_in sin;
     memset(&sin, '\0', sizeof(sin));
     if((s = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) != SOCKET_ERROR){
-        sin.sin_addr.S_un.S_addr = inet_addr(get_addr_by_name(ipaddr));
+        sin.sin_addr.S_un.S_addr = inet_addr(host_to_address(ipaddr));
         sin.sin_family = AF_INET;
         sin.sin_port = htons(port);
         if(connect(s, (const struct sockaddr*)&sin, sizeof(sin)) != SOCKET_ERROR)
