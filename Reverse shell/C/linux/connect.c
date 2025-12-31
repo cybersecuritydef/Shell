@@ -17,7 +17,7 @@
 
 #include "connect.h"
 
-static char *get_addr_by_name(const char *name){
+static char *host_to_address(const char *name){
     struct hostent *hst = NULL;
     if((hst = gethostbyname(name)) != NULL){
         return inet_ntoa(*((struct in_addr *)hst->h_addr_list[0]));
@@ -31,7 +31,7 @@ int connect_to_server(const char *addr, uint16_t port){
     if((s = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP)) != EOF){
         sin.sin_family = AF_INET;
         sin.sin_port = htons(port);
-        sin.sin_addr.s_addr = inet_addr(get_addr_by_name(addr));
+        sin.sin_addr.s_addr = inet_addr(host_to_address(addr));
         if(connect(s, (const struct sockaddr*)&sin, sizeof(sin)) != EOF)
             return s;
     }
